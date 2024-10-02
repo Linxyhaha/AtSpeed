@@ -6,4 +6,4 @@ This is the pytorch implementation of our paper
 - Anaconda 3
 - Python 3.9.0
 - pytorch 1.13.0
-- transformers 
+- transformers 4.41.0
