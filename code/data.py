@@ -137,18 +137,11 @@ class SeqRecDataset(BaseDataset):
 
 
     def _load_data(self):
-        if self.dataset == "beauty":
-            self.train_data = np.load(os.path.join(self.data_path, "training_dict.npy"), allow_pickle=True).item()
-            self.valid_data = np.load(os.path.join(self.data_path, "validation_dict.npy"), allow_pickle=True).item()
-            self.test_data = np.load(os.path.join(self.data_path, "testing_dict.npy"), allow_pickle=True).item()
-            with open(os.path.join(self.data_path, self.dataset + self.index_file), 'r') as f:
-                self.indices = json.load(f)
-        else:
-            self.train_data = np.load(os.path.join(self.data_path, "training_dict.npy"), allow_pickle=True).item()
-            self.valid_data = np.load(os.path.join(self.data_path, "validation_dict.npy"), allow_pickle=True).item()
-            self.test_data = np.load(os.path.join(self.data_path, "testing_dict.npy"), allow_pickle=True).item()
-            with open(os.path.join(self.data_path, self.dataset + self.index_file), 'r') as f:
-                self.indices = json.load(f)
+        self.train_data = np.load(os.path.join(self.data_path, "training_dict.npy"), allow_pickle=True).item()
+        self.valid_data = np.load(os.path.join(self.data_path, "validation_dict.npy"), allow_pickle=True).item()
+        self.test_data = np.load(os.path.join(self.data_path, "testing_dict.npy"), allow_pickle=True).item()
+        with open(os.path.join(self.data_path, self.dataset + self.index_file), 'r') as f:
+            self.indices = json.load(f)
 
     def _remap_items(self):
 

@@ -1,7 +1,7 @@
 from typing import Dict, List
 
-from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
+
 
 
 class Trie(object):
@@ -88,6 +88,7 @@ class Trie(object):
         return self.get(value)
 
 
+
 def prefix_allowed_tokens_fn(candidate_trie):
     def prefix_allowed_tokens(batch_id, sentence):
         sentence = sentence.tolist()
@@ -96,50 +97,3 @@ def prefix_allowed_tokens_fn(candidate_trie):
 
     return prefix_allowed_tokens
 
-
-if __name__ == "__main__":
-    tokenizer = T5Tokenizer.from_pretrained("t5-small")
-    model = T5ForConditionalGeneration.from_pretrained("t5-small")
-    candidates = [
-        "3560",
-        "554",
-        "1825",
-        "1062",
-        "680",
-        "1683",
-        "363",
-        "927",
-        "2345",
-        "1398",
-        "2000",
-        "599",
-        "375",
-        "3637",
-        "3272",
-        "153",
-    ]
-    candidate_trie = Trie([[0] + tokenizer.encode("{}".format(e)) for e in candidates])
-    print(candidate_trie.trie_dict)
-
-    input_s = [
-        "Rust is a very powerful tool for building web applications. It's also a very powerful tool for building web applications.",
-        "anna is a person,",
-    ]
-    input_ids = tokenizer.batch_encode_plus(
-        input_s, padding="longest", return_tensors="pt"
-    )["input_ids"]
-    
-    import ipdb
-    ipdb.set_trace()
-
-    prefix_allowed_tokens = prefix_allowed_tokens_fn(candidate_trie)
-    output_ids = model.generate(
-        input_ids,
-        max_length=150,
-        prefix_allowed_tokens_fn=prefix_allowed_tokens,
-        num_beams=20,
-        num_return_sequences=10,
-    )
-
-    print(output_ids.size())
-    print(tokenizer.batch_decode(output_ids))

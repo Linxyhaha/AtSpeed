@@ -17,21 +17,58 @@ data/
 ```
 
 ### Train
+
+#### Target Model
+
+First, replace the parameters in `code/script/finetune_llama.sh` with your own parameters, such as `LOG_DIR`, `OUTPUT_DIR`, etc.
+
 ```bash
-code/
-├── train_KD.py
-├── KDModels.py
-├── utils.py
-├── data.py
-├── generation_trie.py
-├── collator.py
+LOG_DIR=YOUR_LOG_DIR
+OUTPUT_DIR=YOUR_OUTPUT_DIR
+BASE_MODEL=YOUR_BASE_MODEL_PATH
 ```
 
-### Evaluation
+Then, run the following command to train the target model.
+
 ```bash
-code/
-├── eval.py
-├── KDModels.py
-├── beamSD/
-│   ├── beamSD.py
+cd code
+bash script/finetune_llama.sh
+```
+
+#### Draft Model
+
+First, replace the parameters in `code/script/train.sh` with your own parameters, such as `LOG_DIR`, `OUTPUT_DIR`, `TARGET_MODEL`, `BASE_MODEL`, `MODEL_CLASS`, etc. And modify `accelerate.yaml` according to your needs if necessary.
+
+```bash
+LOG_DIR=YOUR_LOG_DIR
+OUTPUT_DIR=YOUR_OUTPUT_DIR
+TARGET_MODEL=YOUR_TARGET_MODEL_PATH
+BASE_MODEL=YOUR_BASE_MODEL_PATH
+MODEL_CLASS=AtSpeedRModel
+```
+
+Then, run the following command to train the target model.
+
+```bash
+cd code
+bash script/train.sh
+```
+
+
+### Inference
+
+First, replace the parameters in `code/script/inference.sh` with your own parameters, such as `LOG_DIR`, `OUTPUT_DIR`, `DRAFT_MODEL`, `DRAFT_MODEL_NAME`, etc.
+
+```bash
+LOG_DIR=YOUR_LOG_DIR
+OUTPUT_DIR=YOUR_OUTPUT_DIR
+DRAFT_MODEL=DRAFT_MODEL_PATH
+DRATF_MODEL_NAME=DRAFT_MODEL_NAME
+```
+
+Then, run the following command to train the target model.
+
+```bash
+cd code
+bash script/inference.sh
 ```

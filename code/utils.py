@@ -20,32 +20,21 @@ def parse_global_args(parser):
     parser.add_argument("--output_dir", type=str, help="The output directory")
     parser.add_argument("--base_model", type=str, help="target basic model path")
     parser.add_argument("--target_model", type=str, help="lora weights of the target model")
+
+    return parser
+
+def parse_AtSpeed_args(parser):
     parser.add_argument("--train_data", type=str)
     parser.add_argument("--valid_data", type=str)
     parser.add_argument("--model_class", type=str)
-    parser.add_argument("--KD_ratio", type=float, default=0.1)
+    parser.add_argument("--alpha", type=float, default=0.1)
     parser.add_argument("--topK", type=int, default=20)
-    parser.add_argument("--len_y", type=int, default=5, help="length of item identifier for backend LLMRec")
-    # strict KD
-    parser.add_argument("--beta", type=float, default=1.0, help="coefficient of regularization term in strict KD loss")
-    # for on-policy data strategy
+    parser.add_argument("--gamma", type=int, default=5, help="length of item identifier for backend LLMRec")
     parser.add_argument("--r_original", type=float, default=0.0, help='fraction of original data')
     parser.add_argument("--r_student", type=float, default=0.0, help="fraction of student-generated data from model-generated data")
-
     parser.add_argument("--constrained_loss", action="store_true")
     parser.add_argument("--constrained_softmax", action="store_true")
-    parser.add_argument("--temperature_softmax_q", type=float, default=1.0, help='temperature for the constrained softmax for student logits')
-    parser.add_argument("--temperature_softmax_p", type=float, default=1.0, help='temperature for the constrained softmax for teacher logits')
-    parser.add_argument("--noTopK4loss", action="store_true", help="whether to use topK for loss calculation")
-    parser.add_argument("--intervention", action="store_true", help="whether to intervene the teacher topk prob all to 1")
-
-    parser.add_argument("--tau", type=float, default=1.0)
-    parser.add_argument("--weights", type=str, default="None")
-    parser.add_argument("--topK4loss", type=int, default=0)
-    parser.add_argument("--topKto1", action="store_true")
-    parser.add_argument("--topK_p_normal", action="store_true")
-
-
+    parser.add_argument("--temperature_softmax", type=float, default=1.0, help='temperature for the constrained softmax for logits')
 
     return parser
 
@@ -124,7 +113,6 @@ def parse_test_args(parser):
     parser.add_argument("--test_task", type=str, default="SeqRec")
     parser.add_argument("--max_new_token", type=int, default=4)
 
-
     return parser
 
 def parse_llama_args(parser):
@@ -141,6 +129,22 @@ def parse_llama_args(parser):
     parser.add_argument("--wandb_watch", type=str, default="all")
     parser.add_argument("--llama", default=True, action="store_true")
 
+    return parser
+
+def parse_inference_args(parser):
+    parser.add_argument("--draft_model", type=str)
+    parser.add_argument("--target_base_model", type=str)
+    parser.add_argument("--target_ckpt_path", type=str)
+    parser.add_argument("--draft_model_name", type=str)
+    parser.add_argument("--target_model_name", type=str)
+    parser.add_argument("--gamma", default=4, type=int)
+    parser.add_argument("--run_beam_sizes", type=str)
+    parser.add_argument("--draft_beam_size", type=int)
+    parser.add_argument("--prefixAllowed", default=True, action="store_true")
+    parser.add_argument("--do_sample", default=False, action="store_true")
+    parser.add_argument("--temperature", type=float, default=1)
+    parser.add_argument("--L", type=int, default=0)
+    parser.add_argument("--R", type=int, default=None)
     return parser
 
 def get_local_time():
