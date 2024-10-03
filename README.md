@@ -10,9 +10,28 @@ This is the pytorch implementation of our paper
 
 ## Usage
 ### Data
+```bash
+data/
+├── beauty
+├── games
+```
 
 ### Train
-
-### Inference
+```bash
+code/
+├── train_KD.py
+├── KDModels.py
+├── utils.py
+├── data.py
+├── generation_trie.py
+├── collator.py
+```
 
 ### Evaluation
+```bash
+code/
+├── eval.py
+├── KDModels.py
+├── beamSD/
+│   ├── beamSD.py
+```
