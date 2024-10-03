@@ -28,7 +28,7 @@ PORT=7270
 SUFFIX=${MODEL_CLASS:0:-5}_${ALPHA}${constrained_loss}${constrained_softmax}_temp${TEMPERATURE}_wd${WD}
 OUTPUT_DIR=OUTPUT_DIR/${dataset}/llama-68M_${SUFFIX}
 
-accelerate launch \
+nohup accelerate launch \
     --config_file accelerate.yaml \
     --main_process_port ${PORT} \
     train.py \
@@ -60,4 +60,4 @@ accelerate launch \
     ${constrained_softmax} \
     --temperature_softmax ${TEMPERATURE} \
     --weight_decay ${WD} \
-    &>  ${LOG_DIR}/${DATASET}/train_${SUFFIX}.log
+    &>  ${LOG_DIR}/${DATASET}/train_${SUFFIX}.log &

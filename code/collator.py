@@ -1,15 +1,17 @@
 import torch
 import copy
 import argparse
+
 from dataclasses import dataclass
 
 import transformers
-import math
 from torch.utils.data import Sampler
 import torch.distributed as dist
-from transformers import LlamaForCausalLM, LlamaTokenizer, LlamaConfig, T5Tokenizer, T5Config, T5ForConditionalGeneration
+from transformers import LlamaForCausalLM, LlamaTokenizer, LlamaConfig
 
 import ipdb
+
+
 
 class Collator(object):
 
@@ -19,7 +21,6 @@ class Collator(object):
         self.tokenizer = tokenizer
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token_id = 0
-        # print(self.tokenizer.model_max_length)
 
     def __call__(self, batch):
 
@@ -42,9 +43,6 @@ class Collator(object):
         inputs['labels'] = labels['input_ids']
         inputs['labels'][inputs['labels'] == self.tokenizer.pad_token_id] = -100
 
-        # print(inputs.input_ids[0])
-        # print(inputs.labels[0])
-
         return inputs
 
 
@@ -65,8 +63,6 @@ class TestCollator(object):
 
         input_texts = [d["input_ids"] for d in batch]
         targets = [d["labels"] for d in batch]
-        # print(input_texts)
-        # print(targets)
         inputs = self.tokenizer(
             text=input_texts,
             return_tensors="pt",

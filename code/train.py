@@ -79,9 +79,9 @@ def train(args, log=True):
     model = Model.from_pretrained(
         args.base_model,
         # config=config,
-        #load_in_8bit=True,
+        # load_in_8bit=True,
         # load_in_4bit=True,
-        #torch_dtype=torch.float16,
+        # torch_dtype=torch.float16,
         device_map=device_map,
         **KD_args,
     )
