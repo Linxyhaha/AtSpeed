@@ -30,22 +30,6 @@ from beamSD import *
 
 
 
-def prefix_allowed_tokens_fn(candidate_trie):
-
-    sep = tokenizer("Response:")["input_ids"][1:]
-    bos = [1]
-    def prefix_allowed_tokens(batch_id, sentence):
-        for i in range(len(sentence),-1,-1):
-            if sentence[i-len(sep):i].tolist() == sep:
-                if i == len(sentence):
-                    sentence_ = bos
-                else:
-                    sentence_ = [1] + sentence[i:].tolist()
-        trie_out = candidate_trie.get(sentence_)
-        return trie_out
-
-    return prefix_allowed_tokens
-
 def get_prefix_allowed_tokens_fn(indices, tokenizer):
 
     allowed_tokens = {}
