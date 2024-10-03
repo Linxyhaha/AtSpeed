@@ -53,7 +53,7 @@ def parse_dataset_args(parser):
     parser.add_argument("--data_path", type=str, help="data directory")
     parser.add_argument("--tasks", type=str, default="seqrec", help="Downstream tasks, separate by comma")
     parser.add_argument("--dataset", type=str, default="games", help="Dataset name")
-    parser.add_argument("--index_file", type=str, default=".sentencet5-sk4-sk.json", help="the item indices file")
+    parser.add_argument("--index_file", type=str, default=".LCRec-1e-3lr.json", help="the item indices file")
 
     # arguments related to sequential task
     parser.add_argument("--max_his_len", type=int, default=20,
