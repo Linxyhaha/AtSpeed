@@ -25,7 +25,7 @@ CUDA_VISIBLE_DEVICES=${GPU_ID} nohup python -u inference.py \
     --index_file .LCRec-1e-3lr.json \
     --dataset $DATASET \
     --draft_model  $DRAFT_MODEL \
-    --TARGET_BASE_MODEL $TARGET_BASE_MODEL_PATH \
+    --target_base_model $TARGET_BASE_MODEL_PATH \
     --target_ckpt_path $TARGET_CKPT_PATH \
     --draft_model_name $DRAFT_MODEL_NAME \
     --target_model_name $TARGET_MODEL_NAME \

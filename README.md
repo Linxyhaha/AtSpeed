@@ -37,7 +37,21 @@ bash script/finetune_llama.sh
 
 #### Draft Model
 
-First, replace the parameters in `code/script/train.sh` with your own parameters, such as `LOG_DIR`, `OUTPUT_DIR`, `TARGET_MODEL`, `BASE_MODEL`, `MODEL_CLASS`, etc. And modify `accelerate.yaml` according to your needs if necessary.
+1. Generate Teacher Data
+
+Replace the parameters in `code/script/generate_teacher_data.sh` with your own parameters, and then run the following command.
+
+```bash
+cd code
+bash script/generate_teacher_data.sh
+```
+
+Then data will be generated in `${YOUR_OUTPUT_DIR}/${dataset}/train_teacher_data` and `${YOUR_OUTPUT_DIR}/${dataset}/eval_teacher_data`, which is the `train_data` and `valid_data` parameter in `code/script/train.sh`.
+
+
+2. Train Draft Model
+
+Replace the parameters in `code/script/train.sh` with your own parameters, such as `LOG_DIR`, `OUTPUT_DIR`, `TARGET_MODEL`, `BASE_MODEL`, `MODEL_CLASS`, etc. And modify `accelerate.yaml` according to your needs if necessary.
 
 ```bash
 LOG_DIR=YOUR_LOG_DIR
