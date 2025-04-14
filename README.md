@@ -46,7 +46,7 @@ cd code
 bash script/generate_teacher_data.sh
 ```
 
-Then data will be generated in `${YOUR_OUTPUT_DIR}/${dataset}/train_teacher_data` and `${YOUR_OUTPUT_DIR}/${dataset}/eval_teacher_data`, which is the `train_data` and `valid_data` parameter in `code/script/train.sh`.
+Then data will be generated in `${YOUR_OUTPUT_DIR}/${dataset}/train_teacher_data` and `${YOUR_OUTPUT_DIR}/${dataset}/eval_teacher_data`, which are the parameters `train_data` and `valid_data` in `code/script/train.sh`.
 
 
 2. Train Draft Model
