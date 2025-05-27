@@ -1,6 +1,8 @@
 # AtSpeed
-This is the pytorch implementation of our paper
-> Efficient Inference for Large Language Model-based Generative Recommendation
+This is the pytorch implementation of our paper:
+> [Efficient Inference for Large Language Model-based Generative Recommendation](https://arxiv.org/pdf/2410.05165) (ICLR 2025)
+
+We also release a Python package, [BeamSD](https://github.com/transcend-0/BeamSD), which can accelerate the beam search generation of transformers by 1.5x speedup with just one line of code!
 
 ## Environment
 - Anaconda 3
@@ -10,11 +12,17 @@ This is the pytorch implementation of our paper
 
 ## Usage
 ### Data
+
 ```bash
 data/
 ├── beauty
 ├── games
 ```
+
+The data in the floder is already processed and can be used directly. The raw data is from [Amazon product data](https://jmcauley.ucsd.edu/data/amazon/). 
+We sort users' historical interactions by the global timestamps, and then split them into training, validation, and testing sets with the ratio of 8:1:1. If you want to apply this splitting method to your own dataset, please refer to the example for Beauty dataset in `data/data_process.ipynb`. 
+For the item identifier, we follow [LC-Rec](https://github.com/RUCAIBox/LC-Rec) to set the length L = 4, *i.e.,* the token sequence length of a generated item would be 4.
+
 
 ### Train
 
@@ -86,3 +94,19 @@ Then, run the following command to train the target model.
 cd code
 bash script/inference.sh
 ```
+
+
+## Citation
+If you find our work is useful for your research, please consider citing: 
+```
+@inproceedings{lin2024efficient,
+  title={Efficient Inference for Large Language Model-based Generative Recommendation},
+  author={Lin, Xinyu and Yang, Chaoqun and Wang, Wenjie and Li, Yongqi and Du, Cunxiao and Feng, Fuli and Ng, See-Kiong and Chua, Tat-Seng},
+  booktitle={ICLR},
+  year={2025}
+}
+```
+
+## License
+
+NUS © [NExT++](https://www.nextcenter.org/)
